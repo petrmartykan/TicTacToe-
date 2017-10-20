@@ -78,7 +78,34 @@ class Playground {
     }
     
     func getResultState() -> resultState {
+        for i in toes {
+            for ticTac in i {
+                let neighbors = findNeighbors(ticTac: ticTac)
+                print(ticTac.getPosition())
+                for neighbor in neighbors {
+                   print(neighbor.getPosition())
+                }
+                
+                
+            }
+        }
         return .inProgress
+    }
+    
+    func findNeighbors (ticTac: TicTac) -> [TicTac] {
+        return findNeighbors(x: ticTac.getPosition().x,
+                             y: ticTac.getPosition().y)
+    }
+    
+    func findNeighbors(x:Int, y:Int) ->[TicTac] {
+        print("Looking of n \(x, y)")
+        var neighbors = [TicTac]()
+        let nX = x - 1
+        let nY = y - 1
+        if nX >= 0 && nY >= 0 {
+            neighbors.append(toes[nX][nY])
+        }
+        return neighbors
     }
     
 }

@@ -32,6 +32,32 @@ class ViewController: UIViewController {
         logic.insertTicTac(position: (1, 0))
      
         
+        var n = logic.playground.findNeighbors(x: 0, y: 0)
+        printN(n: n)
+        n = logic.playground.findNeighbors(x: 0, y: 1)
+        printN(n: n)
+        n = logic.playground.findNeighbors(x: 0, y: 2)
+        printN(n: n)
+        n = logic.playground.findNeighbors(x: 1, y: 0)
+        printN(n: n)
+        n = logic.playground.findNeighbors(x: 1, y: 1)
+        printN(n: n)
+        n = logic.playground.findNeighbors(x: 1, y: 2)
+        printN(n: n)
+        n = logic.playground.findNeighbors(x: 2, y: 0)
+        printN(n: n)
+        n = logic.playground.findNeighbors(x: 2, y: 1)
+        printN(n: n)
+        n = logic.playground.findNeighbors(x: 2, y: 2)
+        printN(n: n)
+        
+        
+    }
+    
+    func printN (n: [TicTac]) {
+        for i in n {
+            print(i.getPosition())
+        }
     }
 
 
