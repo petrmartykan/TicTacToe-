@@ -10,7 +10,7 @@ import Foundation
 
 class GameLogic {
     
-    let playground:Playground = Playground(x:1, y:1)
+    let playground:Playground = Playground(x:3, y:3)
     var activeTicTacType = TicTac.State.cross
     
     func start() {
