@@ -10,10 +10,19 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var logic:GameLogic!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
    
+        print("TIC TAC TOE")
         
+        logic = GameLogic()
+        logic.start()
+        
+        logic.insertTicTac(position: (0, 0))
+        logic.insertTicTac(position: (0, 0))
         
     }
 
