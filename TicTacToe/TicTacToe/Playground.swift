@@ -65,9 +65,15 @@ class Playground {
         return (x, y)
     }
     
-    func changeTicTacState(state: TicTac.State, position: (x: Int, y: Int)) {
+    
+    
+    func changeTicTacState(state: TicTac.State, position: (x: Int, y: Int)) -> Bool {
         let ticTac = toes[position.x][position.y]
-        ticTac.changeState(state: state)
+        let ticTacChanged = ticTac.changeState(state: state)
+        printPlayground()
+        let result = getResultState()
+        print(result)
+        return ticTacChanged
 
     }
     

@@ -23,14 +23,21 @@ class GameLogic {
     
     func insertTicTac(position:(x:Int, y:Int)) {
         
-        playground.changeTicTacState(state: activeTicTacType, position: position)
-                
-        if(activeTicTacType == .cross) {
-            activeTicTacType = .circle
+        let stateChanged = playground.changeTicTacState(state: activeTicTacType, position: position)
         
-        } else if(activeTicTacType == .circle) {
-            activeTicTacType = .cross
+        if stateChanged == true {
+            
+            if(activeTicTacType == .cross) {
+                activeTicTacType = .circle
+                
+            } else if(activeTicTacType == .circle) {
+                activeTicTacType = .cross
+            }
         }
+        
+        
     }
+    
+    
 }
 

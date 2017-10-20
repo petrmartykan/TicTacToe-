@@ -24,10 +24,14 @@ class ViewController: UIViewController {
         logic.insertTicTac(position: (0, 0))
         logic.insertTicTac(position: (0, 1))
         logic.insertTicTac(position: (1, 0))
+        logic.insertTicTac(position: (0, 0))
+        logic.insertTicTac(position: (0, 1))
+        logic.insertTicTac(position: (1, 0))
+        logic.insertTicTac(position: (0, 0))
+        logic.insertTicTac(position: (0, 1))
+        logic.insertTicTac(position: (1, 0))
      
-        logic.playground.printPlayground()
         
-        print(logic.playground.getSize())
     }
 
 

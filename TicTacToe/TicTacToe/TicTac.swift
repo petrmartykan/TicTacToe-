@@ -30,12 +30,14 @@ class TicTac {
         state = .empty
     }
     
-    func changeState(state:State) {
+    func changeState(state:State) -> Bool {
         
         if(self.state == .empty) {
             self.state = state
+            return true
         } else {
             print("SI DEBIL TENTO TIC TAC UZ JE POUZITY!!! \(self.state)")
+            return false
         }
     }
     func getState() -> State {
