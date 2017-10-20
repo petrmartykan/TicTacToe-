@@ -83,28 +83,110 @@ class Playground {
                 let neighbors = findNeighbors(ticTac: ticTac)
                 print(ticTac.getPosition())
                 for neighbor in neighbors {
-                   print(neighbor.getPosition())
+                    let oX = ticTac.getPosition().x + (ticTac.getPosition().x - neighbor.getPosition().x)
+                    let oY = ticTac.getPosition().y + (ticTac.getPosition().y - neighbor.getPosition().y)
+                    if oX >= 0 && oX < self.x && oY >= 0 && oY < self.y {
+                        if ticTac.getState() == .cross {
+                            return .crossWinner
+                            
+                        } else {
+                            return .circleWinner
+                        }
+                    }
                 }
                 
                 
             }
         }
+        
+        
+        
+        
+        
         return .inProgress
     }
     
     func findNeighbors (ticTac: TicTac) -> [TicTac] {
         return findNeighbors(x: ticTac.getPosition().x,
-                             y: ticTac.getPosition().y)
+                             y: ticTac.getPosition().y, ticTacState: ticTac.getState())
     }
     
-    func findNeighbors(x:Int, y:Int) ->[TicTac] {
+    func findNeighbors(x:Int, y:Int, ticTacState: TicTac.State) ->[TicTac] {
         print("Looking of n \(x, y)")
         var neighbors = [TicTac]()
-        let nX = x - 1
-        let nY = y - 1
+        var nX = x - 1
+        var nY = y - 1
         if nX >= 0 && nY >= 0 {
-            neighbors.append(toes[nX][nY])
+            
+            if toes[nX][nY].getState() == ticTacState {
+                neighbors.append(toes[nX][nY])
+            }
+           
         }
+        
+        nX = x
+        nY = y - 1
+        if nY >= 0 {
+            if toes[nX][nY].getState() == ticTacState {
+                neighbors.append(toes[nX][nY])
+            }
+        }
+        
+        nX = x + 1
+        nY = y + 1
+        
+        if nX < self.x && nY < self.y {
+            if toes[nX][nY].getState() == ticTacState {
+                neighbors.append(toes[nX][nY])
+            }
+        }
+        
+        nX = x + 1
+        nY = y - 1
+        
+        if nX < self.x && nY >= 0 {
+            if toes[nX][nY].getState() == ticTacState {
+                neighbors.append(toes[nX][nY])
+            }
+        }
+        
+        nX = x + 1
+        nY = y
+        
+        if nX < self.x  {
+            if toes[nX][nY].getState() == ticTacState {
+                neighbors.append(toes[nX][nY])
+            }
+        }
+        
+        nX = x - 1
+        nY = y
+        
+        if nX >= 0 {
+            if toes[nX][nY].getState() == ticTacState {
+                neighbors.append(toes[nX][nY])
+            }
+        }
+        
+        nX = x - 1
+        nY = y + 1
+        
+        if nX >= 0 && nY < self.y {
+            if toes[nX][nY].getState() == ticTacState {
+                neighbors.append(toes[nX][nY])
+            }
+        }
+        
+        nX = x
+        nY = y + 1
+        
+        if nY < self.y {
+            if toes[nX][nY].getState() == ticTacState {
+                neighbors.append(toes[nX][nY])
+            }
+        }
+
+
         return neighbors
     }
     
