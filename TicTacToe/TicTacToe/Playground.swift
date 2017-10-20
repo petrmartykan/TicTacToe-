@@ -13,19 +13,66 @@ class Playground {
     private let x:Int
     private let y:Int
     
-    var toes: [[TicTac]] = []
+    enum resultState {
+        case inProgress
+        case crossWinner
+        case circleWinner
+        case draw
+    }
+    
+    private var toes: [[TicTac]] = []
     
     init(x:Int, y:Int) {
         self.x = x
         self.y = y
-        for _ in 0..<x {
+        for i in 0..<x {
             var t = [TicTac]()
-            for _ in 0..<y {
-                t.append(TicTac())
+            for z in 0..<y {
+                t.append(TicTac(x: i, y: z))
             }
             toes.append(t)
             
         }
+    }
+    
+    
+    func printPlayground() {
+        for i in toes {
+            
+            var line: String = ""
+            
+            
+            
+            for ticTac in i {
+                let state = ticTac.getState()
+                
+                if state == .cross {
+                    line.append("X")
+                }
+                else if state == .circle {
+                    line.append("O")
+                }
+                else {
+                    line.append("-")
+                }
+                
+            }
+            print(line)
+        }
+    }
+    
+    func getSize() -> (x: Int, y: Int) {
+        return (x, y)
+    }
+    
+    func changeTicTacState(state: TicTac.State, position: (x: Int, y: Int)) {
+        let ticTac = toes[position.x][position.y]
+        ticTac.changeState(state: state)
+
+    }
+    
+    func getResultState() -> resultState {
+        return .inProgress
     }
     
 }

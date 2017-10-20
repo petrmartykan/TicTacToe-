@@ -19,7 +19,14 @@ class TicTac {
     
     private var state:State
     
-    init() {
+    private var x: Int
+    private var y: Int
+    
+    init(x: Int, y: Int) {
+        
+        self.x = x
+        self.y = y
+        
         state = .empty
     }
     
@@ -30,5 +37,11 @@ class TicTac {
         } else {
             print("SI DEBIL TENTO TIC TAC UZ JE POUZITY!!! \(self.state)")
         }
+    }
+    func getState() -> State {
+        return state
+    }
+    func getPosition() -> (x: Int, y: Int){
+    return(x, y)
     }
 }
