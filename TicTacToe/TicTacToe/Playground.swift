@@ -94,13 +94,30 @@ class Playground {
                         }
                     }
                 }
-                
-                
             }
+            
         }
         
-        
-        
+        for x in toes {
+            for tic in x {
+                let neighbors = findNeighbors(ticTac: tic)
+                for neighbor in neighbors {
+                    print(tic.getPosition())
+                    let oX = tic.getPosition().x + (tic.getPosition().x - neighbor.getPosition().x)
+                    let oY = tic.getPosition().y + (tic.getPosition().y - neighbor.getPosition().y)
+                    if oX >= 0 && oX > self.x && oY >= 0 && oY == self.y {
+                        if tic.getState() == .cross {
+                            return .crossWinner
+                        } else if tic.getState() == .circle {
+                            return .circleWinner
+                        } else {
+                            return .draw
+                        }
+                    }
+                    
+                }
+            }
+        }
         
         
         return .inProgress
