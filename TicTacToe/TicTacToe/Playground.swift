@@ -17,7 +17,7 @@ class Playground {
         case inProgress
         case crossWinner
         case circleWinner
-        case draw
+        case drawEnd
     }
     
     private var toes: [[TicTac]] = []
@@ -88,39 +88,34 @@ class Playground {
                     if oX >= 0 && oX < self.x && oY >= 0 && oY < self.y {
                         if ticTac.getState() == .cross {
                             return .crossWinner
+                        } else if ticTac.getState() == .circle {
+                            return .circleWinner
+                        }
                             
-                        } else {
-                            return .circleWinner
+                        else if isPlaygroundFull() {
+                            return .drawEnd
+                            
                         }
                     }
                 }
             }
-            
         }
-        
-        for x in toes {
-            for tic in x {
-                let neighbors = findNeighbors(ticTac: tic)
-                for neighbor in neighbors {
-                    print(tic.getPosition())
-                    let oX = tic.getPosition().x + (tic.getPosition().x - neighbor.getPosition().x)
-                    let oY = tic.getPosition().y + (tic.getPosition().y - neighbor.getPosition().y)
-                    if oX >= 0 && oX > self.x && oY >= 0 && oY == self.y {
-                        if tic.getState() == .cross {
-                            return .crossWinner
-                        } else if tic.getState() == .circle {
-                            return .circleWinner
-                        } else {
-                            return .draw
-                        }
-                    }
-                    
-                }
-            }
-        }
-        
         
         return .inProgress
+    }
+    
+    func isPlaygroundFull() -> Bool {
+        for x in toes {
+            for tic in x {
+                if tic.getState() == .empty {
+                   return true
+                }
+                 else {
+                    return false
+                }
+            }
+        }
+        return true || false
     }
     
     func findNeighbors (ticTac: TicTac) -> [TicTac] {

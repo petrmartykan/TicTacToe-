@@ -15,6 +15,7 @@ class TicTac {
         case empty
         case cross
         case circle
+        
     }
     
     private var state:State
