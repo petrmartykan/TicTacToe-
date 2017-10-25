@@ -61,6 +61,32 @@ class Playground {
         }
     }
     
+    /*func playgroundCount() {
+        for i in toes {
+            
+            var countCross = [Int]()
+            var countCircle = [Int]()
+            var count = [Int]()
+            let numb = 0
+            for ticTac in i {
+                let state = ticTac.getState()
+                
+                if state == .cross {
+                    countCross.append(numb + countCross.count)
+                    print("Crosses count: \(countCross.count)")
+                }
+                else if state == .circle {
+                    countCircle.append(numb + countCircle.count)
+                    print("Circles count: \(countCircle.count)")
+                }
+                else {
+                    count.append(numb + 1)
+                    print("Empty count: \(count.count)")
+                }
+            }
+        }
+    }*/
+    
     func getSize() -> (x: Int, y: Int) {
         return (x, y)
     }
@@ -71,6 +97,10 @@ class Playground {
         let ticTac = toes[position.x][position.y]
         let ticTacChanged = ticTac.changeState(state: state)
         printPlayground()
+        
+        let count = strikeBackCount()
+        print(count)
+        
         let result = getResultState()
         print(result)
         return ticTacChanged
@@ -91,31 +121,63 @@ class Playground {
                         } else if ticTac.getState() == .circle {
                             return .circleWinner
                         }
-                            
+                        else if ticTac.getState() == .empty {
+                            return .inProgress
+                        }
                         else if isPlaygroundFull() {
                             return .drawEnd
-                            
                         }
                     }
                 }
             }
         }
-        
         return .inProgress
     }
     
     func isPlaygroundFull() -> Bool {
-        for x in toes {
-            for tic in x {
-                if tic.getState() == .empty {
-                   return true
-                }
-                 else {
+        
+        for i in toes {
+            for ticTac in i {
+              
+                if ticTac.getState() == .empty {
+                    print("TicTac je prázdný")
                     return false
+                } else if ticTac.getState() == .cross || ticTac.getState() == .circle {
+                    print("TicTac je plný")
+                    return true
                 }
             }
         }
-        return true || false
+        return true
+    }
+    
+    
+    func strikeBackCount() -> (crossesCount: Int, circlesCount: Int, emptyCount: Int) {
+        let xInt: Int = 0
+        let oInt: Int = 0
+        let emptyInt: Int = 0
+        var cross = [Int]()
+        var circle = [Int]()
+        var empty = [Int]()
+        for i in toes {
+            for ticTac in i {
+                let X = ticTac.getState() == .cross
+                let O = ticTac.getState() == .circle
+                
+                if X {
+                    cross.append(xInt + 1)
+                }
+                    
+                else if O {
+                    circle.append(oInt + 1)
+                }
+                    
+                else {
+                    empty.append(emptyInt + 1)
+                }
+            }
+        }
+        return (cross.count, circle.count, empty.count)
     }
     
     func findNeighbors (ticTac: TicTac) -> [TicTac] {
