@@ -121,11 +121,11 @@ class Playground {
                         } else if ticTac.getState() == .circle {
                             return .circleWinner
                         }
-                        else if ticTac.getState() == .empty {
-                            return .inProgress
-                        }
                         else if isPlaygroundFull() {
                             return .drawEnd
+                        }
+                        else if ticTac.getState() == .empty {
+                            return .inProgress
                         }
                     }
                 }
@@ -137,17 +137,20 @@ class Playground {
     func isPlaygroundFull() -> Bool {
         
         //musis prejist celym playgroundom a ak narazis na .empty, znamena to, ze playground este nie je plny
-        // v tvojom pripade vsak v situacii, ked narazi na prvy akykolvek circle alebo cross, tak vyhodnotis, ze playground je plny, co ale nemusi byt pravda, pretoze mozu byt este dalsie volne pozicie, ku ktorym sa tvoj FOR cyklus este ani edostal a skrz return uz ani nedostane - predebugguj si to riadok po riadku
+        // v tvojom pripade vsak v situacii, ked narazi na prvy akykolvek circle alebo cross, tak vyhodnotis, ze playground je plny, co ale nemusi byt pravda, pretoze mozu byt este dalsie volne pozicie, ku ktorym sa tvoj FOR cyklus este ani edostal a skrz return uz ani nedostane - predebugguj si to riadok po riadku 
+        
+        //if ticTac.getState() == .cross || ticTac.getState() == .circle
         
         for i in toes {
             for ticTac in i {
               
                 if ticTac.getState() == .empty {
                     print("TicTac je prázdný")
-                    return false
-                } else if ticTac.getState() == .cross || ticTac.getState() == .circle {
+                    
+                } else {
+                    
                     print("TicTac je plný")
-                    return true
+                    
                 }
             }
         }
