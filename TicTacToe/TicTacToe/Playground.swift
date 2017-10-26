@@ -136,6 +136,9 @@ class Playground {
     
     func isPlaygroundFull() -> Bool {
         
+        //musis prejist celym playgroundom a ak narazis na .empty, znamena to, ze playground este nie je plny
+        // v tvojom pripade vsak v situacii, ked narazi na prvy akykolvek circle alebo cross, tak vyhodnotis, ze playground je plny, co ale nemusi byt pravda, pretoze mozu byt este dalsie volne pozicie, ku ktorym sa tvoj FOR cyklus este ani edostal a skrz return uz ani nedostane - predebugguj si to riadok po riadku
+        
         for i in toes {
             for ticTac in i {
               
@@ -153,31 +156,43 @@ class Playground {
     
     
     func strikeBackCount() -> (crossesCount: Int, circlesCount: Int, emptyCount: Int) {
-        let xInt: Int = 0
-        let oInt: Int = 0
-        let emptyInt: Int = 0
-        var cross = [Int]()
-        var circle = [Int]()
-        var empty = [Int]()
+
+        // zmenil som LET na VAR, aby som ich mohol pouzit ako pocitadla a pomenoval trosku zmysluplnejsie podla ich pouzitia
+//        let xInt: Int = 0
+//        let oInt: Int = 0
+//        let emptyInt: Int = 0
+        
+        var xCounter: Int = 0
+        var oCounter: Int = 0
+        var emptyCounter: Int = 0
+        
+        // nie je potreba davat to do poli, potrebujes len count, na to ti postacia tie Int-y, ktore si si definoval
+//        var cross = [Int]()
+//        var circle = [Int]()
+//        var empty = [Int]()
+        
         for i in toes {
             for ticTac in i {
                 let X = ticTac.getState() == .cross
                 let O = ticTac.getState() == .circle
                 
                 if X {
-                    cross.append(xInt + 1)
+//                    cross.append(xInt + 1)
+                    xCounter = xCounter + 1
                 }
                     
                 else if O {
-                    circle.append(oInt + 1)
+//                    circle.append(oInt + 1)
+                    oCounter = oCounter + 1
                 }
                     
                 else {
-                    empty.append(emptyInt + 1)
+//                    empty.append(emptyInt + 1)
+                    emptyCounter = emptyCounter + 1
                 }
             }
         }
-        return (cross.count, circle.count, empty.count)
+        return (xCounter, oCounter, emptyCounter)
     }
     
     func findNeighbors (ticTac: TicTac) -> [TicTac] {
