@@ -35,24 +35,18 @@ class Playground {
         }
     }
     
-    
     func printPlayground() {
+
         for i in toes {
-            
             var line: String = ""
-            
-            
-            
             for ticTac in i {
                 let state = ticTac.getState()
                 
                 if state == .cross {
                     line.append("X")
-                }
-                else if state == .circle {
+                } else if state == .circle {
                     line.append("O")
-                }
-                else {
+                } else {
                     line.append("-")
                 }
                 
@@ -61,93 +55,81 @@ class Playground {
         }
     }
     
-    /*func playgroundCount() {
-        for i in toes {
-            
-            var countCross = [Int]()
-            var countCircle = [Int]()
-            var count = [Int]()
-            let numb = 0
-            for ticTac in i {
-                let state = ticTac.getState()
-                
-                if state == .cross {
-                    countCross.append(numb + countCross.count)
-                    print("Crosses count: \(countCross.count)")
-                }
-                else if state == .circle {
-                    countCircle.append(numb + countCircle.count)
-                    print("Circles count: \(countCircle.count)")
-                }
-                else {
-                    count.append(numb + 1)
-                    print("Empty count: \(count.count)")
-                }
-            }
-        }
-    }*/
-    
     func getSize() -> (x: Int, y: Int) {
         return (x, y)
     }
     
-    
-    
     func changeTicTacState(state: TicTac.State, position: (x: Int, y: Int)) -> Bool {
+
         let ticTac = toes[position.x][position.y]
         let ticTacChanged = ticTac.changeState(state: state)
-        printPlayground()
         
-        let count = strikeBackCount()
-        print(count)
+        printPlayground()
         
         let result = getResultState()
         print(result)
+        
         return ticTacChanged
-
     }
     
     func getResultState() -> resultState {
+        
+        // LOOKING FOR WINNER
+        
         for i in toes {
             for ticTac in i {
+                
+                if(ticTac.getState() == .empty) {
+                    continue
+                }
+                
                 let neighbors = findNeighbors(ticTac: ticTac)
-                print(ticTac.getPosition())
                 for neighbor in neighbors {
+                    
                     let oX = ticTac.getPosition().x + (ticTac.getPosition().x - neighbor.getPosition().x)
                     let oY = ticTac.getPosition().y + (ticTac.getPosition().y - neighbor.getPosition().y)
+
                     if oX >= 0 && oX < self.x && oY >= 0 && oY < self.y {
-                        if ticTac.getState() == .cross {
-                            return .crossWinner
-                        } else if ticTac.getState() == .circle {
-                            return .circleWinner
-                        }
-                        else if isPlaygroundFull() {
-                            return .drawEnd
-                            
+        
+                        let oppositeTicTac = toes[oX][oY]
+//                        print("ticTac:\(ticTac.getPosition()) \(ticTac.getState()) neighbor:\(neighbor.getPosition()) \(neighbor.getState()) oppos:\(oppositeTicTac.getPosition()) \(oppositeTicTac.getState())")
+                        
+                        if ticTac.getState() == oppositeTicTac.getState() {
+                            if(ticTac.getState() == .cross) {
+                                return .crossWinner
+                            } else {
+                                return .circleWinner
+                            }
                         }
                     }
                 }
             }
         }
+        
+        
+        // WINNER WAS NOT FOUND, SO LOOK FOR DRAW
+        
+        if(isPlaygroundFull()) {
+            return .drawEnd
+        }
+
+        // WINNER WAS NOT FOUND AND PLPAYGROUND IS STILL NOT FULL -> CONTINUE WITH GAME
+        
         return .inProgress
     }
     
     func isPlaygroundFull() -> Bool {
-
         
+        // FIND AT LEAST ONE EMPTY TIC TAC -> MEANS THERE IS STILL PLACE TO INSERT TICTAC
         for i in toes {
             for ticTac in i {
-              
                 if ticTac.getState() == .empty {
-                    print("TicTac je prázdný")
-                    
-                } else {
-                    
-                    print("TicTac je plný")
-                    
+                    return false
                 }
             }
         }
+        
+        // THERE IS NO EMPTY TIC TAC IN PLAYGROUND -> MEANS ALL ARE INSERTED (USED)
         return true
     }
     
@@ -188,7 +170,6 @@ class Playground {
     }
     
     func findNeighbors(x:Int, y:Int, ticTacState: TicTac.State) ->[TicTac] {
-        print("Looking of n \(x, y)")
         var neighbors = [TicTac]()
         var nX = x - 1
         var nY = y - 1

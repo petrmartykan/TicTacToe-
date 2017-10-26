@@ -21,20 +21,29 @@ class ViewController: UIViewController {
         logic = GameLogic()
         logic.start()
         
-        logic.insertTicTac(position: (0, 0))
-        logic.insertTicTac(position: (0, 1))
-        logic.insertTicTac(position: (0, 2))
-        logic.insertTicTac(position: (1, 0))
-        logic.insertTicTac(position: (1, 2))
+//        logic.insertTicTac(position: (0, 0))
+//        logic.insertTicTac(position: (0, 1))
+//        logic.insertTicTac(position: (0, 2))
+//        logic.insertTicTac(position: (1, 0))
+//        logic.insertTicTac(position: (1, 2))
+//        logic.insertTicTac(position: (1, 1))
+//        logic.insertTicTac(position: (2, 2))
+//        logic.insertTicTac(position: (2, 0))
+//        logic.insertTicTac(position: (2, 1))
+        
+        
         logic.insertTicTac(position: (1, 1))
+        logic.insertTicTac(position: (0, 0))
         logic.insertTicTac(position: (2, 0))
-        logic.insertTicTac(position: (2, 2))
+        logic.insertTicTac(position: (0, 1))
         logic.insertTicTac(position: (2, 1))
+        logic.insertTicTac(position: (0, 2))
         
-        
-        
-        
-        
+//        logic.insertTicTac(position: (0, 0))
+//        logic.insertTicTac(position: (2, 0))
+//        logic.insertTicTac(position: (0, 1))
+//        logic.insertTicTac(position: (2, 1))
+//        logic.insertTicTac(position: (0, 2))
         
         
     }

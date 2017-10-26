@@ -23,6 +23,7 @@ class GameLogic {
     
     func insertTicTac(position:(x:Int, y:Int)) {
         
+        print("\n")
         let stateChanged = playground.changeTicTacState(state: activeTicTacType, position: position)
         
         if stateChanged == true {
