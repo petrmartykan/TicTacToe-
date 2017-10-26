@@ -123,9 +123,7 @@ class Playground {
                         }
                         else if isPlaygroundFull() {
                             return .drawEnd
-                        }
-                        else if ticTac.getState() == .empty {
-                            return .inProgress
+                            
                         }
                     }
                 }
@@ -135,11 +133,7 @@ class Playground {
     }
     
     func isPlaygroundFull() -> Bool {
-        
-        //musis prejist celym playgroundom a ak narazis na .empty, znamena to, ze playground este nie je plny
-        // v tvojom pripade vsak v situacii, ked narazi na prvy akykolvek circle alebo cross, tak vyhodnotis, ze playground je plny, co ale nemusi byt pravda, pretoze mozu byt este dalsie volne pozicie, ku ktorym sa tvoj FOR cyklus este ani edostal a skrz return uz ani nedostane - predebugguj si to riadok po riadku 
-        
-        //if ticTac.getState() == .cross || ticTac.getState() == .circle
+
         
         for i in toes {
             for ticTac in i {
@@ -157,22 +151,12 @@ class Playground {
         return true
     }
     
-    
     func strikeBackCount() -> (crossesCount: Int, circlesCount: Int, emptyCount: Int) {
-
-        // zmenil som LET na VAR, aby som ich mohol pouzit ako pocitadla a pomenoval trosku zmysluplnejsie podla ich pouzitia
-//        let xInt: Int = 0
-//        let oInt: Int = 0
-//        let emptyInt: Int = 0
         
         var xCounter: Int = 0
         var oCounter: Int = 0
         var emptyCounter: Int = 0
         
-        // nie je potreba davat to do poli, potrebujes len count, na to ti postacia tie Int-y, ktore si si definoval
-//        var cross = [Int]()
-//        var circle = [Int]()
-//        var empty = [Int]()
         
         for i in toes {
             for ticTac in i {
@@ -180,17 +164,17 @@ class Playground {
                 let O = ticTac.getState() == .circle
                 
                 if X {
-//                    cross.append(xInt + 1)
+
                     xCounter = xCounter + 1
                 }
                     
                 else if O {
-//                    circle.append(oInt + 1)
+
                     oCounter = oCounter + 1
                 }
                     
                 else {
-//                    empty.append(emptyInt + 1)
+
                     emptyCounter = emptyCounter + 1
                 }
             }
